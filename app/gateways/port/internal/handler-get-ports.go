@@ -1,7 +1,8 @@
 package internal
 
 import (
-	"log"
+	"context"
+	portPb "github.com/ic2hrmk/ship_ports/app/services/port/pb/port"
 
 	"github.com/emicklei/go-restful"
 	"github.com/ic2hrmk/ship_ports/app/gateways/port/errors"
@@ -29,39 +30,34 @@ func (rcv *portDomainGateway) getPorts(
 		return
 	}
 
-	log.Println(limit, offset)
-
-	out := &representation.PortListResponse{
-
-	}
-
-	/*
-
 	//
 	// Request information
 	//
-	portsDetails, err := rcv.portServiceClient.GetPorts(request.Request.Context(), &portPb.GetPortsRequest{
+	portsDetails, err := rcv.portServiceClient.GetPorts(context.Background(), &portPb.GetPortsRequest{
 		Limit:  limit,
 		Offset: offset,
 	})
 
 	if err != nil {
 		helpers.ResponseWithInternalError(response, err)
+		return
 	}
 
 	//
 	// Assemble response
 	//
+	out := &representation.PortListResponse{
+
+	}
+
 	out.Items = make([]*representation.PortEntityResponse, len(portsDetails.GetItems()))
 	out.Found = len(portsDetails.GetItems())
 
-	for i, port := range portsDetails.GetItems() {
-		out[i] = &representation.PortEntityResponse{
+	for i, _ := range portsDetails.GetItems() {
+		out.Items[i] = &representation.PortEntityResponse{
 			//...
 		}
 	}
-
-	*/
 
 	helpers.ResponseWithOK(response, out)
 }

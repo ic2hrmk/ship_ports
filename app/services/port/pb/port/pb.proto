@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package port;
+
+import "validate/validate.proto";
+
+option go_package = "port";
+
+//@formatter:off
+
+service PortDomainService {
+    rpc SavePort (SavePortRequest) returns (SavePortResponse) {}
+    rpc GetPorts (GetPortsRequest) returns (GetPortsResponse) {}
+}
+
+message SavePortRequest {
+    PortEntity Port = 1;
+}
+
+message SavePortResponse {
+
+}
+
+message GetPortsRequest {
+    uint64 Limit  = 1;
+    uint64 Offset = 2;
+}
+
+message GetPortsResponse {
+    repeated PortEntity Items   = 1;
+}
+
+//
+// Shared messages
+//
+
+message PortEntity {
+
+}
+
+//
+// Service's error codes
+//
+
+enum PortDomainServiceErrorCode {
+    Unknown         = 0;
+    Internal        = 5000;
+    InvalidRequest  = 4000;
+}
+
+//@formatter:on

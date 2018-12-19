@@ -1,17 +1,34 @@
 package internal
 
 import (
+	portPb "github.com/ic2hrmk/ship_ports/app/services/port/pb/port"
+
 	"github.com/emicklei/go-restful"
 	"github.com/go-ozzo/ozzo-validation"
 	"github.com/ic2hrmk/ship_ports/app"
 )
 
+//
+// Port Gateway micro-service
+//
+type portDomainGateway struct {
+	webContainer *restful.Container
+	config       *portDomainGatewayConfig
+
+	//
+	// Clients to back-services
+	//
+	portServiceClient portPb.PortDomainServiceClient
+}
+
 func NewPortDomainService(
 	config *portDomainGatewayConfig,
+	portServiceClient portPb.PortDomainServiceClient,
 ) app.MicroService {
 	service := &portDomainGateway{
-		config:       config,
-		webContainer: restful.NewContainer(),
+		config:            config,
+		webContainer:      restful.NewContainer(),
+		portServiceClient: portServiceClient,
 	}
 
 	service.init()

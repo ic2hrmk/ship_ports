@@ -8,14 +8,6 @@ import (
 	"github.com/ic2hrmk/ship_ports/shared/gateway/filters"
 )
 
-//
-// Port Gateway micro-service
-//
-type portDomainGateway struct {
-	webContainer *restful.Container
-	config       *portDomainGatewayConfig
-}
-
 func (rcv *portDomainGateway) init() {
 	ws := &restful.WebService{}
 
