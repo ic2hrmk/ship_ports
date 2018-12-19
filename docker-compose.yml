@@ -5,6 +5,16 @@ volumes:
     external: true
 
 services:
+  port-gtw:
+    image: golang:latest
+    env_file:
+    - docker-compose.env
+    volumes:
+    - .:/go/src/github.com/ic2hrmk/ship_ports/
+    working_dir: /go/src/github.com/ic2hrmk/ship_ports/
+    command: go run ./entry/entry.go --kind=port-gtw --address=:8080
+    restart: always
+
   #
   # 3-rd parties
   #
@@ -29,9 +39,9 @@ services:
   nginx:
     image: "nginx:latest"
     ports:
-    - "8080:80"
+    - "8081:80"
     volumes:
     - ./docker-compose.nginx.conf:/etc/nginx/conf.d/default.conf
     restart: always
-    logging:
-      driver: none
+#    logging:
+#      driver: none
