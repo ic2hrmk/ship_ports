@@ -1,12 +1,10 @@
 package helpers
 
 import (
-	"log"
-	"net/http"
-	"strings"
-
 	"github.com/emicklei/go-restful"
 	"github.com/ic2hrmk/ship_ports/shared/gateway/representation"
+	"log"
+	"net/http"
 )
 
 func logError(err error) {
@@ -16,7 +14,7 @@ func logError(err error) {
 		message = err.Error()
 	}
 
-	log.Printf("%10s| error during request proccessing, %s", strings.Repeat(" ", 10), message)
+	log.Printf("   ERROR  | error during request proccessing, %s", message)
 }
 
 func ResponseWithBadRequest(response *restful.Response, err error, message string) {

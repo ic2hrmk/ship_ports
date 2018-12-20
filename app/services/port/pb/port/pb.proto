@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package port;
+
+import "validate/validate.proto";
+
+option go_package = "port";
+
+//@formatter:off
+
+service PortDomainService {
+    rpc FindAllPorts    (FindAllPortsRequest)       returns (FindAllPortsResponse) {}
+
+    rpc SavePort        (SavePortRequest)       returns (SavePortResponse) {}
+    rpc SavePortsBulk   (SavePortsBulkRequest)  returns (SavePortsBulkResponse) {}
+}
+
+message FindAllPortsRequest {
+    uint64 Limit  = 1;
+    uint64 Offset = 2;
+}
+
+message FindAllPortsResponse {
+    repeated PortEntity Items   = 1;
+}
+
+message SavePortRequest {
+    PortEntity Port = 1 [(validate.rules).message.required = true];
+}
+
+message SavePortResponse {
+
+}
+
+message SavePortsBulkRequest {
+    repeated PortEntity Items = 1;
+}
+
+message SavePortsBulkResponse {
+
+}
+
+//
+// Shared messages
+//
+
+message PortEntity {
+    string PortID                = 1 [(validate.rules).string.min_len = 1];
+    string Name                  = 2 [(validate.rules).string.min_len = 1];
+    string Code                  = 3 [(validate.rules).string.min_len = 1];
+    repeated string  Alias       = 4;
+    repeated string  Unlocs      = 5;
+
+    string Country               = 6 [(validate.rules).string.min_len = 1];
+    repeated string  Regions     = 7;
+    string Province              = 8;
+    string City                  = 9 [(validate.rules).string.min_len = 1];
+
+    repeated float Coordinates   = 10;
+    string Timezone              = 11 [(validate.rules).string.min_len = 1];
+}
+
+//
+// Service's error codes
+//
+
+enum PortDomainServiceErrorCode {
+    Unknown         = 0;
+    Internal        = 5000;
+    InvalidRequest  = 4000;
+}
+
+//@formatter:on
