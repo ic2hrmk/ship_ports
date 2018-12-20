@@ -25,5 +25,4 @@ func (rcv *portDomainGateway) importPortsFromFile(
 	//
 	// Try to read file as a stream
 	//
-
 }

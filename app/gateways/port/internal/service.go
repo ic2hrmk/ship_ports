@@ -3,6 +3,7 @@ package internal
 import (
 	"net/http"
 
+	"github.com/braintree/manners"
 	"github.com/emicklei/go-restful"
 	"github.com/ic2hrmk/ship_ports/app/gateways/port/representation"
 	"github.com/ic2hrmk/ship_ports/shared/gateway/filters"
@@ -42,5 +43,9 @@ func (rcv *portDomainGateway) init() {
 }
 
 func (rcv *portDomainGateway) Serve(address string) error {
-	return http.ListenAndServe(address, rcv.webContainer)
+	return rcv.serve(address)
+}
+
+func (rcv *portDomainGateway) serve(address string) error {
+	return manners.ListenAndServe(address, rcv.webContainer)
 }
