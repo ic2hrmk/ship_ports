@@ -4,6 +4,9 @@
 *.dll
 *.so
 *.dylib
+port-service
+
+# Libraries
 vendor
 
 # Test binary, build with `go test -c`

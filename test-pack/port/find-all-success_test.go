@@ -2,25 +2,17 @@ package port
 
 import (
 	"fmt"
-	"github.com/ic2hrmk/ship_ports/shared/gateway/representation"
 	"testing"
 
 	"github.com/go-resty/resty"
+	"github.com/ic2hrmk/ship_ports/app/gateways/port/representation"
 	"github.com/ic2hrmk/ship_ports/shared/env"
 )
 
 //
-// Looks how service reacts on case, when file is OK
+// Looks how service reacts on case, when file is damaged
 //
-func TestImport_Success(t *testing.T) {
-	//
-	// Get file fixture path
-	//
-	testFilePath, err := env.GetStringVar(correctFilePath)
-	if err != nil {
-		t.Fatalf("failed to get fixture file path: %s", err)
-	}
-
+func TestFindAll_Success(t *testing.T) {
 	//
 	// Get target URL
 	//
@@ -32,13 +24,13 @@ func TestImport_Success(t *testing.T) {
 	//
 	// Assemble request
 	//
+	findResponse := &representation.PortListResponse{}
 	errResponse := &representation.ErrorResponse{}
 
 	resp, err := resty.R().
-		SetHeader("Content-Type", "multipart/form-data").
-		SetFile("file", testFilePath).
+		SetResult(&findResponse).
 		SetError(&errResponse).
-		Post(fmt.Sprintf("%s/api/ports/import", portGatewayURL))
+		Get(fmt.Sprintf("%s/api/ports", portGatewayURL))
 
 	if err != nil {
 		t.Fatalf("failed to send upload request, %s", err)
@@ -49,6 +41,10 @@ func TestImport_Success(t *testing.T) {
 	}
 
 	if errResponse != nil && errResponse.Message != "" {
-		t.Fatalf("error response is not nil, %v", *errResponse)
+		t.Fatalf("error response is not nil, %v", errResponse)
+	}
+
+	if findResponse == nil {
+		t.Fatalf("find response is nil")
 	}
 }

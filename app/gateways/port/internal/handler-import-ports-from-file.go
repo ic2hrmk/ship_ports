@@ -111,7 +111,10 @@ func (rcv *portDomainGateway) decodePortEntityStream(
 				}
 
 				row := &representation.ImportedPortEntity{}
-				dec.Decode(&row)
+
+				if err := dec.Decode(&row); err != nil {
+					return fmt.Errorf("failed to decodeentity: %s", err)
+				}
 
 				parsed <- &port.PortEntity{
 					PortID:      portID,
@@ -139,7 +142,7 @@ func (rcv *portDomainGateway) upsertPortEntityFromStream(parsed chan *port.PortE
 		case record := <-parsed:
 			_, err := rcv.portServiceClient.SavePort(context.Background(), &port.SavePortRequest{Port: record})
 			if err != nil {
-				log.Printf("  --->  | Failed to persist entity [PortID=%s], %s", record.PortID, err )
+				log.Printf("  --->  | Failed to persist entity [PortID=%s], %s", record.PortID, err)
 			}
 
 		case <-done:

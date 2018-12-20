@@ -43,6 +43,14 @@
   version = "v3.5.0"
 
 [[projects]]
+  digest = "1:64241365fa95f35567976f0790ecfa85c9cb3d4131cc6d6cc7adb1cc6437159f"
+  name = "github.com/go-resty/resty"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "13ff84ebd5bdfa46a342d9edb869e21560a478f8"
+  version = "v1.10.2"
+
+[[projects]]
   digest = "1:5d1b5a25486fc7d4e133646d834f6fca7ba1cef9903d40e7aa786c41b89e9e91"
   name = "github.com/golang/protobuf"
   packages = [
@@ -99,7 +107,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:89a0cb976397aa9157a45bb2b896d0bcd07ee095ac975e0f03c53250c402265e"
+  digest = "1:afb50a5cd6b2dfbed2fa334d9ec9eca8c35372e2ae3c950ba72917a8fcbe46af"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -108,6 +116,7 @@
     "http2/hpack",
     "idna",
     "internal/timeseries",
+    "publicsuffix",
     "trace",
   ]
   pruneopts = "UT"
@@ -203,6 +212,7 @@
     "github.com/globalsign/mgo",
     "github.com/globalsign/mgo/bson",
     "github.com/go-ozzo/ozzo-validation",
+    "github.com/go-resty/resty",
     "github.com/golang/protobuf/proto",
     "github.com/golang/protobuf/ptypes",
     "github.com/joho/godotenv",
