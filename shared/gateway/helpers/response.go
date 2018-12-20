@@ -42,3 +42,7 @@ func ResponseWithOK(response *restful.Response, data interface{}) {
 		logError(err)
 	}
 }
+
+func ResponseWithNoContent(response *restful.Response) {
+	response.WriteHeader(http.StatusNoContent)
+}

@@ -503,12 +503,7 @@ func (m *PortEntity) Validate() error {
 		}
 	}
 
-	if utf8.RuneCountInString(m.GetCode()) < 1 {
-		return PortEntityValidationError{
-			field:  "Code",
-			reason: "value length must be at least 1 runes",
-		}
-	}
+	// no validation rules for Code
 
 	if utf8.RuneCountInString(m.GetCountry()) < 1 {
 		return PortEntityValidationError{
@@ -526,12 +521,7 @@ func (m *PortEntity) Validate() error {
 		}
 	}
 
-	if utf8.RuneCountInString(m.GetTimezone()) < 1 {
-		return PortEntityValidationError{
-			field:  "Timezone",
-			reason: "value length must be at least 1 runes",
-		}
-	}
+	// no validation rules for Timezone
 
 	return nil
 }

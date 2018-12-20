@@ -21,10 +21,9 @@ func (rcv *portDomainGateway) init() {
 		Operation("importPortsFromFile").
 		Consumes("multipart/form-data").
 		Param(
-			ws.FormParameter("file", "Import").DataType("file"),
+			ws.FormParameter(fileParameterName, "Import").DataType("file"),
 		).
-		Writes(representation.ImportFromFileResponse{}).
-		Returns(http.StatusOK, http.StatusText(http.StatusOK), representation.ImportFromFileResponse{}).
+		Returns(http.StatusNoContent, http.StatusText(http.StatusOK), nil).
 		Returns(http.StatusBadRequest, http.StatusText(http.StatusBadRequest), representation.ErrorResponse{}).
 		Returns(http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), representation.ErrorResponse{}))
 

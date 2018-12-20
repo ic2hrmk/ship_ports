@@ -47,7 +47,7 @@ message SavePortsBulkResponse {
 message PortEntity {
     string PortID                = 1 [(validate.rules).string.min_len = 1];
     string Name                  = 2 [(validate.rules).string.min_len = 1];
-    string Code                  = 3 [(validate.rules).string.min_len = 1];
+    string Code                  = 3;
     repeated string  Alias       = 4;
     repeated string  Unlocs      = 5;
 
@@ -57,7 +57,7 @@ message PortEntity {
     string City                  = 9 [(validate.rules).string.min_len = 1];
 
     repeated float Coordinates   = 10;
-    string Timezone              = 11 [(validate.rules).string.min_len = 1];
+    string Timezone              = 11;
 }
 
 //
