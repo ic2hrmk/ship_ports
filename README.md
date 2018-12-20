@@ -48,6 +48,23 @@ SERVICE_PORT_ADDRESS=:10001
 PORT_MAX_IMPORT_FILE_SIZE=209715200
 ~~~
 
+## Test
+To run all available tests:
+~~~bash
+make run-tests
+~~~
+
+## Linting
+You need to install linter at first (**ONLY ONCE**):
+~~~bash
+make install-linter
+~~~
+
+To run linter, use next command:
+~~~bash
+make run-linter
+~~~
+
 ## Points of improvement
  - Separate 'City, Country etc from Port domain to other service' (task says only about 2 services)
  - Move to simplified ID, not connected with real port ID

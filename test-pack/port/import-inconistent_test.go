@@ -2,21 +2,22 @@ package port
 
 import (
 	"fmt"
-	"github.com/ic2hrmk/ship_ports/shared/gateway/representation"
+	"github.com/ic2hrmk/ship_ports/app/gateways/port/errors"
 	"testing"
 
 	"github.com/go-resty/resty"
 	"github.com/ic2hrmk/ship_ports/shared/env"
+	"github.com/ic2hrmk/ship_ports/shared/gateway/representation"
 )
 
 //
-// Looks how service reacts on case, when file is OK
+// Looks how service reacts on case, when file is damaged
 //
-func TestImport_Success(t *testing.T) {
+func TestImport_Inconsistent(t *testing.T) {
 	//
 	// Get file fixture path
 	//
-	testFilePath, err := env.GetStringVar(correctFilePath)
+	testFilePath, err := env.GetStringVar(inconsistentFilePath)
 	if err != nil {
 		t.Fatalf("failed to get fixture file path: %s", err)
 	}
@@ -44,11 +45,15 @@ func TestImport_Success(t *testing.T) {
 		t.Fatalf("failed to send upload request, %s", err)
 	}
 
-	if !resp.IsSuccess() {
-		t.Fatalf("wrong server response - errors are detected, %v", resp)
+	if resp.IsSuccess() {
+		t.Fatalf("wrong server response - errors are not detected")
 	}
 
-	if errResponse != nil && errResponse.Message != "" {
-		t.Fatalf("error response is not nil, %v", *errResponse)
+	if errResponse == nil {
+		t.Fatalf("error response is nil")
+	}
+
+	if errResponse.Message != errors.ErrInconsistentJson {
+		t.Fatalf("wrong error message [%s], expected [%s]", errResponse.Message, errors.ErrInconsistentJson)
 	}
 }

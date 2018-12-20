@@ -82,7 +82,7 @@ func (r *PortRepository) prepareResultList(query *mgo.Query) ([]*model.Port, err
 		return records, nil
 	}
 
-	err = query.All(records)
+	err = query.All(&records)
 	if err != nil {
 		return nil, err
 	}

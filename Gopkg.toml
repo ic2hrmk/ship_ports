@@ -3,6 +3,10 @@
   version = "2.8.0"
 
 [[constraint]]
+  name = "github.com/go-resty/resty"
+  version = "=1.10.2"
+
+[[constraint]]
   branch = "master"
   name = "github.com/globalsign/mgo"
 
