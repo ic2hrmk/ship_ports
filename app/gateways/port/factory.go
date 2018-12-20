@@ -13,6 +13,9 @@ import (
 
 const ServiceName = "port-gtw"
 
+//
+// Service constructor
+//
 func FactoryMethod() (app.MicroService, error) {
 	//
 	// Resolve configurations

@@ -2,6 +2,7 @@ package internal
 
 import (
 	"fmt"
+	"github.com/ic2hrmk/ship_ports/app/services/port/persistence/repository"
 	"net"
 
 	portPb "github.com/ic2hrmk/ship_ports/app/services/port/pb/port"
@@ -12,11 +13,14 @@ import (
 )
 
 type portDomainService struct {
+	portRepository repository.PortRepository
 }
 
-func NewPortDomainService() app.MicroService {
+func NewPortDomainService(
+	portRepository repository.PortRepository,
+) app.MicroService {
 	return &portDomainService{
-
+		portRepository: portRepository,
 	}
 }
 
@@ -41,4 +45,3 @@ func (rcv *portDomainService) serve(address string) error {
 
 	return nil
 }
-

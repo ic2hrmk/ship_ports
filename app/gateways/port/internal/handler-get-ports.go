@@ -33,10 +33,11 @@ func (rcv *portDomainGateway) getPorts(
 	//
 	// Request information
 	//
-	portsDetails, err := rcv.portServiceClient.GetPorts(context.Background(), &portPb.GetPortsRequest{
-		Limit:  limit,
-		Offset: offset,
-	})
+	portsDetails, err := rcv.portServiceClient.FindAllPorts(context.Background(),
+		&portPb.FindAllPortsRequest{
+			Limit:  limit,
+			Offset: offset,
+		})
 
 	if err != nil {
 		helpers.ResponseWithInternalError(response, err)
@@ -47,15 +48,23 @@ func (rcv *portDomainGateway) getPorts(
 	// Assemble response
 	//
 	out := &representation.PortListResponse{
-
+		Items: make([]*representation.PortEntityResponse, len(portsDetails.GetItems())),
+		Found: len(portsDetails.GetItems()),
 	}
 
-	out.Items = make([]*representation.PortEntityResponse, len(portsDetails.GetItems()))
-	out.Found = len(portsDetails.GetItems())
-
-	for i, _ := range portsDetails.GetItems() {
+	for i, port := range portsDetails.GetItems() {
 		out.Items[i] = &representation.PortEntityResponse{
-			//...
+			PortID:      port.GetPortID(),
+			Name:        port.GetName(),
+			Code:        port.GetCode(),
+			Alias:       port.GetAlias(),
+			Unlocs:      port.GetUnlocs(),
+			Country:     port.GetCountry(),
+			Regions:     port.GetRegions(),
+			Province:    port.GetProvince(),
+			City:        port.GetCity(),
+			Coordinates: port.GetCoordinates(),
+			Timezone:    port.GetTimezone(),
 		}
 	}
 

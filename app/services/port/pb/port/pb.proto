@@ -9,25 +9,35 @@ option go_package = "port";
 //@formatter:off
 
 service PortDomainService {
-    rpc SavePort (SavePortRequest) returns (SavePortResponse) {}
-    rpc GetPorts (GetPortsRequest) returns (GetPortsResponse) {}
+    rpc FindAllPorts    (FindAllPortsRequest)       returns (FindAllPortsResponse) {}
+
+    rpc SavePort        (SavePortRequest)       returns (SavePortResponse) {}
+    rpc SavePortsBulk   (SavePortsBulkRequest)  returns (SavePortsBulkResponse) {}
+}
+
+message FindAllPortsRequest {
+    uint64 Limit  = 1;
+    uint64 Offset = 2;
+}
+
+message FindAllPortsResponse {
+    repeated PortEntity Items   = 1;
 }
 
 message SavePortRequest {
-    PortEntity Port = 1;
+    PortEntity Port = 1 [(validate.rules).message.required = true];
 }
 
 message SavePortResponse {
 
 }
 
-message GetPortsRequest {
-    uint64 Limit  = 1;
-    uint64 Offset = 2;
+message SavePortsBulkRequest {
+    repeated PortEntity Items = 1;
 }
 
-message GetPortsResponse {
-    repeated PortEntity Items   = 1;
+message SavePortsBulkResponse {
+
 }
 
 //
@@ -35,7 +45,19 @@ message GetPortsResponse {
 //
 
 message PortEntity {
+    string PortID                = 1 [(validate.rules).string.min_len = 1];
+    string Name                  = 2 [(validate.rules).string.min_len = 1];
+    string Code                  = 3 [(validate.rules).string.min_len = 1];
+    repeated string  Alias       = 4;
+    repeated string  Unlocs      = 5;
 
+    string Country               = 6 [(validate.rules).string.min_len = 1];
+    repeated string  Regions     = 7;
+    string Province              = 8;
+    string City                  = 9 [(validate.rules).string.min_len = 1];
+
+    repeated float Coordinates   = 10;
+    string Timezone              = 11 [(validate.rules).string.min_len = 1];
 }
 
 //

@@ -13,6 +13,20 @@
   version = "v2.8.0"
 
 [[projects]]
+  branch = "master"
+  digest = "1:78102ee4d536347316bc42e818340cc50902e45dbd7fdd524c5a1fc0cb07b588"
+  name = "github.com/globalsign/mgo"
+  packages = [
+    ".",
+    "bson",
+    "internal/json",
+    "internal/sasl",
+    "internal/scram",
+  ]
+  pruneopts = "UT"
+  revision = "eeefdecb41b842af6dc652aaea4026e8403e62df"
+
+[[projects]]
   digest = "1:c116114869f44c711fa5baf9e019fa327101c82ddc4dcc1de84db1f6c43a2d36"
   name = "github.com/go-ozzo/ozzo-validation"
   packages = ["."]
@@ -177,6 +191,8 @@
   analyzer-version = 1
   input-imports = [
     "github.com/emicklei/go-restful",
+    "github.com/globalsign/mgo",
+    "github.com/globalsign/mgo/bson",
     "github.com/go-ozzo/ozzo-validation",
     "github.com/golang/protobuf/proto",
     "github.com/golang/protobuf/ptypes",

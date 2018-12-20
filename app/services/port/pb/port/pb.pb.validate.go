@@ -33,12 +33,172 @@ var (
 	_ = ptypes.DynamicAny{}
 )
 
+// Validate checks the field values on FindAllPortsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *FindAllPortsRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Limit
+
+	// no validation rules for Offset
+
+	return nil
+}
+
+// FindAllPortsRequestValidationError is the validation error returned by
+// FindAllPortsRequest.Validate if the designated constraints aren't met.
+type FindAllPortsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FindAllPortsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FindAllPortsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FindAllPortsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FindAllPortsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FindAllPortsRequestValidationError) ErrorName() string {
+	return "FindAllPortsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FindAllPortsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFindAllPortsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FindAllPortsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FindAllPortsRequestValidationError{}
+
+// Validate checks the field values on FindAllPortsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *FindAllPortsResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return FindAllPortsResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// FindAllPortsResponseValidationError is the validation error returned by
+// FindAllPortsResponse.Validate if the designated constraints aren't met.
+type FindAllPortsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FindAllPortsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FindAllPortsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FindAllPortsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FindAllPortsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FindAllPortsResponseValidationError) ErrorName() string {
+	return "FindAllPortsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FindAllPortsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFindAllPortsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FindAllPortsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FindAllPortsResponseValidationError{}
+
 // Validate checks the field values on SavePortRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, an
 // error is returned.
 func (m *SavePortRequest) Validate() error {
 	if m == nil {
 		return nil
+	}
+
+	if m.GetPort() == nil {
+		return SavePortRequestValidationError{
+			field:  "Port",
+			reason: "value is required",
+		}
 	}
 
 	if v, ok := interface{}(m.GetPort()).(interface{ Validate() error }); ok {
@@ -173,79 +333,10 @@ var _ interface {
 	ErrorName() string
 } = SavePortResponseValidationError{}
 
-// Validate checks the field values on GetPortsRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *GetPortsRequest) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	// no validation rules for Limit
-
-	// no validation rules for Offset
-
-	return nil
-}
-
-// GetPortsRequestValidationError is the validation error returned by
-// GetPortsRequest.Validate if the designated constraints aren't met.
-type GetPortsRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetPortsRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetPortsRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetPortsRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetPortsRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetPortsRequestValidationError) ErrorName() string { return "GetPortsRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e GetPortsRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetPortsRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetPortsRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetPortsRequestValidationError{}
-
-// Validate checks the field values on GetPortsResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *GetPortsResponse) Validate() error {
+// Validate checks the field values on SavePortsBulkRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SavePortsBulkRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -255,7 +346,7 @@ func (m *GetPortsResponse) Validate() error {
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetPortsResponseValidationError{
+				return SavePortsBulkRequestValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -268,9 +359,9 @@ func (m *GetPortsResponse) Validate() error {
 	return nil
 }
 
-// GetPortsResponseValidationError is the validation error returned by
-// GetPortsResponse.Validate if the designated constraints aren't met.
-type GetPortsResponseValidationError struct {
+// SavePortsBulkRequestValidationError is the validation error returned by
+// SavePortsBulkRequest.Validate if the designated constraints aren't met.
+type SavePortsBulkRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -278,22 +369,24 @@ type GetPortsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPortsResponseValidationError) Field() string { return e.field }
+func (e SavePortsBulkRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPortsResponseValidationError) Reason() string { return e.reason }
+func (e SavePortsBulkRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPortsResponseValidationError) Cause() error { return e.cause }
+func (e SavePortsBulkRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPortsResponseValidationError) Key() bool { return e.key }
+func (e SavePortsBulkRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPortsResponseValidationError) ErrorName() string { return "GetPortsResponseValidationError" }
+func (e SavePortsBulkRequestValidationError) ErrorName() string {
+	return "SavePortsBulkRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetPortsResponseValidationError) Error() string {
+func (e SavePortsBulkRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -305,14 +398,14 @@ func (e GetPortsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPortsResponse.%s: %s%s",
+		"invalid %sSavePortsBulkRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPortsResponseValidationError{}
+var _ error = SavePortsBulkRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -320,13 +413,124 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPortsResponseValidationError{}
+} = SavePortsBulkRequestValidationError{}
+
+// Validate checks the field values on SavePortsBulkResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SavePortsBulkResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// SavePortsBulkResponseValidationError is the validation error returned by
+// SavePortsBulkResponse.Validate if the designated constraints aren't met.
+type SavePortsBulkResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SavePortsBulkResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SavePortsBulkResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SavePortsBulkResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SavePortsBulkResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SavePortsBulkResponseValidationError) ErrorName() string {
+	return "SavePortsBulkResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SavePortsBulkResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSavePortsBulkResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SavePortsBulkResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SavePortsBulkResponseValidationError{}
 
 // Validate checks the field values on PortEntity with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
 func (m *PortEntity) Validate() error {
 	if m == nil {
 		return nil
+	}
+
+	if utf8.RuneCountInString(m.GetPortID()) < 1 {
+		return PortEntityValidationError{
+			field:  "PortID",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		return PortEntityValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetCode()) < 1 {
+		return PortEntityValidationError{
+			field:  "Code",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetCountry()) < 1 {
+		return PortEntityValidationError{
+			field:  "Country",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	// no validation rules for Province
+
+	if utf8.RuneCountInString(m.GetCity()) < 1 {
+		return PortEntityValidationError{
+			field:  "City",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetTimezone()) < 1 {
+		return PortEntityValidationError{
+			field:  "Timezone",
+			reason: "value length must be at least 1 runes",
+		}
 	}
 
 	return nil
