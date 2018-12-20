@@ -84,7 +84,7 @@ func (rcv *portDomainGatewayConfigBuilder) Validate() error {
 // ============ Configuration setters ================
 //
 
-func (rcv *portDomainGatewayConfigBuilder) SetImportFileMaxSize(size int64) (*portDomainGatewayConfigBuilder) {
+func (rcv *portDomainGatewayConfigBuilder) SetImportFileMaxSize(size int64) *portDomainGatewayConfigBuilder {
 	rcv.maxImportFileSize = size
 	return rcv
 }

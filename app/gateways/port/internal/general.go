@@ -8,6 +8,8 @@ import (
 )
 
 const (
+	fileParameterName = "file"
+
 	limitParameterName  = "limit"
 	offsetParameterName = "offset"
 )

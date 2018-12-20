@@ -17,4 +17,3 @@ func InitConnection(mongoURL, mongoDB string) (*mgo.Database, error) {
 
 	return session.DB(mongoDB), nil
 }
-

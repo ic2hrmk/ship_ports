@@ -1,9 +1,6 @@
 SERVICE=port
 PROTO_FILE=pb/$(SERVICE)/pb.proto
 
-build:
-	go build -o port-service entry/entry.go
-
 gen-proto:
 	protoc -I/usr/local/include -I. \
         -I$(GOPATH)/src \

@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:57840705195634873ce9e1fa65d87dd1169352f793e6e3cfb81570b95350a79b"
+  name = "github.com/braintree/manners"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0b5e6b2c2843f4c83c2a40f96980b09cf4af733c"
+  version = "0.4.0"
+
+[[projects]]
   digest = "1:899234af23e5793c34e06fd397f86ba33af5307b959b6a7afd19b63db065a9d7"
   name = "github.com/emicklei/go-restful"
   packages = [
@@ -190,6 +198,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/braintree/manners",
     "github.com/emicklei/go-restful",
     "github.com/globalsign/mgo",
     "github.com/globalsign/mgo/bson",
