@@ -30,7 +30,7 @@ func (r *PortRepository) Save(record *model.Port) (*model.Port, error) {
 	return record, nil
 }
 
-func (r *PortRepository) SaveBulk(records []*model.Port) (error) {
+func (r *PortRepository) SaveBulk(records []*model.Port) error {
 	bulkOperator := r.collection().Bulk()
 
 	for i := range records {
@@ -41,7 +41,7 @@ func (r *PortRepository) SaveBulk(records []*model.Port) (error) {
 		return err
 	}
 
-	return  nil
+	return nil
 }
 
 func (r *PortRepository) FindAll(limit, offset uint64) ([]*model.Port, error) {
@@ -49,6 +49,7 @@ func (r *PortRepository) FindAll(limit, offset uint64) ([]*model.Port, error) {
 		r.collection().Find(bson.M{}).Limit(int(limit)).Skip(int(offset)))
 }
 
+//nolint:megacheck
 func (r *PortRepository) prepareOneResult(query *mgo.Query) (*model.Port, error) {
 	count, err := query.Count()
 	if err != nil {
@@ -88,4 +89,3 @@ func (r *PortRepository) prepareResultList(query *mgo.Query) ([]*model.Port, err
 
 	return records, nil
 }
-

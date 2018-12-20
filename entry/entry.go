@@ -12,7 +12,7 @@ import (
 )
 
 //go:generate go run entry.go --kind=port-gtw --address=:8080 --env=docker-compose.env
-//go:generate go run entry.go --kind=port-srv
+//go:generate go run entry.go --kind=port-srv --address=:10001 --env=.env
 
 func main() {
 	//
