@@ -1,0 +1,53 @@
+{
+  "111": {
+    "name": "Ajman1111",
+    "city": "Ajman",
+    "country": "United Arab Emirates",
+    "alias": [],
+    "regions": [],
+    "coordinates": [
+      55.5136433,
+      25.4052165
+    ],
+    "province": "Ajman",
+    "timezone": "Asia/Dubai",
+    "unlocs": [
+      "123"
+    ],
+    "code": "52000"
+  },
+  "222": {
+    "name": "Abu Dhabi",
+    "coordinates": [
+      54.37,
+      24.47
+    ],
+    "city": "Abu Dhabi",
+    "province": "Abu Z¸aby [Abu Dhabi]",
+    "country": "United Arab Emirates",
+    "alias": [],
+    "regions": [],
+    "timezone": "Asia/Dubai",
+    "unlocs": [
+      "321"
+    ],
+    "code": "52001"
+  },
+  "333": {
+    "name": "Dubai",
+    "coordinates": [
+      55.27,
+      25.25
+    ],
+    "city": "Dubai",
+    "province": "Dubayy [Dubai]",
+    "country": "United Arab Emirates",
+    "alias": [],
+    "regions": [],
+    "timezone": "Asia/Dubai",
+    "unlocs": [
+      "321"
+    ],
+    "code": "52005"
+  }
+}
